@@ -9,16 +9,22 @@ using namespace std;
 class Parser {
 
 private:
-    Instruction* parseCat1Instruction(const string& line);
-    Instruction* parseCat2Instruction(const string& line);
-    Instruction* parseCat3Instruction(const string& line);
-    Instruction* parseCat4Instruction(const string& line);
+    shared_ptr<Instruction> parseCat1Instruction(const string& line);
+    shared_ptr<Instruction> parseCat2Instruction(const string& line);
+    shared_ptr<Instruction> parseCat3Instruction(const string& line);
+    shared_ptr<Instruction> parseCat4Instruction(const string& line);
 
 public:
-    Instruction* parseLine(const string& line);
+    shared_ptr<Instruction> parseLine(const string& line);
 
 private:
     static const int CAT_ONE = 0;
+    static const int CAT_TWO = 1;
+
+    // Cat 1 instructions
+    static const int INST_J = 0;
+
+    static const int INST_ADD = 0;
 };
 
 #endif

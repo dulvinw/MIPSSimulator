@@ -4,6 +4,6 @@
 #include "Instruction.h"
 #include <vector>
 
-using InstructionVector = std::vector<Instruction*>; 
+using InstructionVector = std::vector<std::shared_ptr<Instruction> >; 
 
 #endif

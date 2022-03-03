@@ -4,6 +4,7 @@
 class Instruction {
 public:
     virtual void execute() = 0;
+    virtual void print() = 0;
 
     virtual ~Instruction() {}
 };
