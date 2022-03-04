@@ -142,11 +142,9 @@ shared_ptr<Instruction> Parser::parseCat5Instruction(const string& line) {
 void Parser::readFile() {
     ifstream file;
 
-    try
-    {
-        file.open(_fileName);
-        file.exceptions(std::ifstream::failbit);
+    file.open(_fileName);
 
+    if (file.is_open()) {
         string line; 
         while (getline(file, line)) {
             auto instruction = parseInstruction(line.substr(0, 32));
@@ -164,10 +162,6 @@ void Parser::readFile() {
         }
         
         file.close();
-    }
-    catch(const std::ios_base::failure& fail)
-    {
-
     }
 }
 
