@@ -3,8 +3,8 @@
 #include <iostream>
 #include <sstream>
 
-void BreakInstruction::execute() {
-    std::cout << "Hello world";
+int BreakInstruction::execute(int* registers, DataMap& data) {
+    return PROGRAM_EXIT;
 }
 
 std::string BreakInstruction::decode() {

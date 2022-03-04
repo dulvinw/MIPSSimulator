@@ -1,10 +1,12 @@
 #include "AddIInstruction.h"
+#include "Constants.h"
 
 #include <iostream>
 #include <sstream>
 
-void AddIInstruction::execute() {
-    std::cout << "Hello world";
+int AddIInstruction::execute(int* registers, DataMap& data) {
+    registers[_dest] = registers[_srcOne] + _immediate;
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string AddIInstruction::decode() {

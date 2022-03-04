@@ -3,8 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-void OrIInstruction::execute() {
-    std::cout << "Hello world";
+int OrIInstruction::execute(int* registers, DataMap& data) {
+    registers[_dest] = registers[_srcOne] | _immediate;
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string OrIInstruction::decode() {

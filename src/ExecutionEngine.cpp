@@ -1,6 +1,7 @@
 #include "ExecutionEngine.h"
 #include "Constants.h"
 #include "Definitions.h"
+#include "BreakInstruction.h"
 
 #include <fstream>
 #include <iostream>
@@ -27,16 +28,28 @@ void ExecutionEngine::executeInstruction(std::ofstream& file) {
     auto data = _parser.getData();
 
     int cycleCount = 1;
-    for (auto entry : instructions) {
-        auto instruction = entry.second;
-
+    auto instruction = getNextInstruction(instructions, START_INSTRUCTION_ADDRESS);
+    while (instruction != nullptr) {
         printHeader(file, instruction, cycleCount);
-        instruction->execute();
+        auto nextAddress = instruction->execute(_registers, data);
         printRegisters(file);
         printData(file, data);
 
+        instruction = getNextInstruction(instructions, nextAddress);
         cycleCount++;
     }
+}
+
+shared_ptr<Instruction> ExecutionEngine::getNextInstruction(InstructionMap& instructions, const int address) {
+    auto currInstruction = instructions.find(address);
+    if (currInstruction == instructions.end()) {
+        return nullptr;
+    }
+
+    if (address == PROGRAM_EXIT)
+        return nullptr;
+
+    return currInstruction->second;
 }
 
 void ExecutionEngine::printHeader(std::ofstream& file, std::shared_ptr<Instruction> instruction, const int cycleCount) {

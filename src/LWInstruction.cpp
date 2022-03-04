@@ -1,10 +1,13 @@
 #include "LWInstruction.h"
+#include "Data.h"
 
 #include <iostream>
 #include <sstream>
 
-void LWInstruction::execute() {
-    std::cout << "Hello world";
+int LWInstruction::execute(int* registers, DataMap& data) {
+    int memAddress = registers[_base] + _offset;
+    registers[_rt] = data[memAddress]->_data;
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string LWInstruction::decode() {

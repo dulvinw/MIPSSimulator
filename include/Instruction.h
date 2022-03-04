@@ -1,11 +1,14 @@
 #ifndef INSTRUCTION_H
 #define INSTRUCTION_H
 
+#include "Definitions.h"
+#include "Constants.h"
+
 #include <string>
 #include <sstream>
 class Instruction {
 public:
-    virtual void execute() = 0;
+    virtual int execute(int* registers, DataMap& data) = 0;
     virtual std::string decode() = 0;
 
     std::string getPreamble() {

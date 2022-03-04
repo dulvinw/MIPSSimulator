@@ -3,8 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-void SRAInstruction::execute() {
-    std::cout << "Hello world";
+int SRAInstruction::execute(int* registers, DataMap& data) {
+    registers[_dest] = registers[_srcOne] >> _immediate; // need to revist
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string SRAInstruction::decode() {

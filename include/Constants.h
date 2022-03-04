@@ -11,4 +11,8 @@ static const int NUM_OF_COLUMNS_IN_REGISTER_REPORT = 8;
 
 static const int NUM_OF_COLUMNS_IN_DATA_REPORT = 8;
 
+static const int START_INSTRUCTION_ADDRESS = 256;
+static const int NEXT_INSTRUCTION_OFFSET = 4;
+static const int PROGRAM_EXIT = -1;
+
 #endif

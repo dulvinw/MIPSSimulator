@@ -7,7 +7,7 @@
 
 class AddInstruction: public Instruction {
 public:
-    void execute();
+    int execute(int* registers, DataMap& data);
     std::string decode();
     static std::shared_ptr<AddInstruction> parse(const std::string& line, const int instructionId);
     std::string getInstructionString();

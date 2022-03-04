@@ -3,8 +3,8 @@
 #include <iostream>
 #include <sstream>
 
-void DIVInstruction::execute() {
-    std::cout << "Hello world";
+int DIVInstruction::execute(int* registers, DataMap& data) {
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string DIVInstruction::decode() {

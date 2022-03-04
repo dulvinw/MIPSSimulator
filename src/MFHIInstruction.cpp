@@ -3,8 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-void MFHIInstruction::execute() {
+int MFHIInstruction::execute(int* registers, DataMap& data) {
     std::cout << "Hello world";
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string MFHIInstruction::decode() {

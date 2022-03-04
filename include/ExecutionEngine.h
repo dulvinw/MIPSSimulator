@@ -25,6 +25,7 @@ private:
     void printRegisters(std::ofstream& file);
     void printFirstColumnInRegisterReport(std::ofstream& file, const int i);
     void printFirstColumnInDataReport(std::ofstream& file, const int i);
+    shared_ptr<Instruction> getNextInstruction(InstructionMap& instructions, const int address);
 
 private:
     Parser& _parser;

@@ -3,8 +3,8 @@
 #include <iostream>
 #include <sstream>
 
-void JumpInstruction::execute() {
-    std::cout << "JINSTRUCTION" << std::endl;
+int JumpInstruction::execute(int* registers, DataMap& data) {
+    return _jumpTo;
 }
 
 std::string JumpInstruction::decode() {

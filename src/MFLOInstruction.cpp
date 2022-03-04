@@ -3,8 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-void MFLOInstruction::execute() {
+int MFLOInstruction::execute(int* registers, DataMap& data) {
     std::cout << "Hello world";
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string MFLOInstruction::decode() {

@@ -1,10 +1,13 @@
 #include "SWInstruction.h"
+#include "Data.h"
 
 #include <iostream>
 #include <sstream>
 
-void SWInstruction::execute() {
-    std::cout << "Hello world";
+int SWInstruction::execute(int* registers, DataMap& data) {
+    int memAddress = registers[_base] + _offset;
+    data[memAddress]->_data = registers[_rt];
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string SWInstruction::decode() {

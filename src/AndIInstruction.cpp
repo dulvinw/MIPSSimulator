@@ -3,8 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-void AndIInstruction::execute() {
-    std::cout << "Hello world";
+int AndIInstruction::execute(int* registers, DataMap& data) {
+    registers[_dest] = registers[_srcOne] & registers[_immediate];
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string AndIInstruction::decode() {

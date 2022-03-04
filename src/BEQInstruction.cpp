@@ -3,8 +3,11 @@
 #include <iostream>
 #include <sstream>
 
-void BEQInstruction::execute() {
-    std::cout << "Hello world";
+int BEQInstruction::execute(int* registers, DataMap& data) {
+    if (registers[_r] == registers[_t])
+        return _instructionId + _offset + NEXT_INSTRUCTION_OFFSET;
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
+
 }
 
 std::string BEQInstruction::decode() {

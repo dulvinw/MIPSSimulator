@@ -3,8 +3,10 @@
 #include <iostream>
 #include <sstream>
 
-void BGTZInstruction::execute() {
-    std::cout << "Hello world";
+int BGTZInstruction::execute(int* registers, DataMap& data) {
+    if (registers[_r] > 0)
+        return _instructionId + _offset + NEXT_INSTRUCTION_OFFSET;
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string BGTZInstruction::decode() {

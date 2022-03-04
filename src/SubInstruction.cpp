@@ -3,8 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-void SubInstruction::execute() {
-    std::cout << "Hello world";
+int SubInstruction::execute(int* registers, DataMap& data) {
+    registers[_dest] = registers[_srcOne] - registers[_srcTwo];
+    return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
 std::string SubInstruction::decode() {
