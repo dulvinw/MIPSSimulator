@@ -9,7 +9,7 @@ class BGTZInstruction: public Instruction {
 public:
     int execute(int* registers, DataMap& data);
     std::string decode();
-    static std::shared_ptr<BGTZInstruction> parse(const std::string& line, const int instructionId);
+    static BGTZInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
     BGTZInstruction() = delete;

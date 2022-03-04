@@ -10,7 +10,7 @@ public:
     int execute(int* registers, DataMap& data);
     std::string decode();
 
-    static std::shared_ptr<JumpInstruction> parse(const std::string& line, const int instructionId);
+    static JumpInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
 private:

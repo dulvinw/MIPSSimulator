@@ -9,7 +9,7 @@ class SRAInstruction: public Instruction {
 public:
     int execute(int* registers, DataMap& data);
     std::string decode();
-    static std::shared_ptr<SRAInstruction> parse(const std::string& line, const int instructionId);
+    static SRAInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
     SRAInstruction() = delete;

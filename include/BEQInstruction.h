@@ -9,7 +9,7 @@ class BEQInstruction: public Instruction {
 public:
     int execute(int* registers, DataMap& data);
     std::string decode();
-    static std::shared_ptr<BEQInstruction> parse(const std::string& line, const int instructionId);
+    static BEQInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
     BEQInstruction() = delete;

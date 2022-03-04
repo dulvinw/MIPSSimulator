@@ -21,12 +21,12 @@ std::string JumpInstruction::getInstructionString() {
     return ss.str();
 }
 
-std::shared_ptr<JumpInstruction> JumpInstruction::parse(const std::string& line, const int instructionId) {
+JumpInstruction* JumpInstruction::parse(const std::string& line, const int instructionId) {
     std::string formatted = line.substr(2).append("00");
     auto lowerBits = stoi(formatted, 0, 2); // TODO: Fix this calculation
     auto upperBits = (15 << 28) & (instructionId+4);
 
     auto instruction = lowerBits | upperBits;
 
-    return std::shared_ptr<JumpInstruction>(new JumpInstruction(instruction, line, instructionId));
+    return new JumpInstruction(instruction, line, instructionId);
 }

@@ -9,7 +9,7 @@ class BreakInstruction: public Instruction {
 public:
     int execute(int* registers, DataMap& data);
     std::string decode();
-    static std::shared_ptr<BreakInstruction> parse(const std::string& line, const int instructionId);
+    static BreakInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
     BreakInstruction() = delete;

@@ -22,10 +22,10 @@ std::string SubInstruction::getInstructionString() {
     return ss.str();
 }
 
-std::shared_ptr<SubInstruction> SubInstruction::parse(const std::string& line, const int instructionId) {
+SubInstruction* SubInstruction::parse(const std::string& line, const int instructionId) {
     auto dest = stoi(line.substr(6, 5), 0, 2);
     auto srcOne = stoi(line.substr(11, 5), 0, 2);
     auto srcTwo = stoi(line.substr(16, 5), 0, 2);
 
-    return std::shared_ptr<SubInstruction>(new SubInstruction(dest, srcOne, srcTwo, line, instructionId));
+    return new SubInstruction(dest, srcOne, srcTwo, line, instructionId);
 }

@@ -24,12 +24,12 @@ std::string BNEInstruction::getInstructionString() {
     return ss.str();
 }
 
-std::shared_ptr<BNEInstruction> BNEInstruction::parse(const std::string& line, const int instructionId) {
+BNEInstruction* BNEInstruction::parse(const std::string& line, const int instructionId) {
     auto r = stoi(line.substr(6, 5), 0, 2);
     auto t = stoi(line.substr(11, 5), 0, 2);
     auto offset = getOffset(line.substr(16, 16));
 
-    return std::shared_ptr<BNEInstruction>(new BNEInstruction(r, t, offset, line, instructionId));
+    return new BNEInstruction(r, t, offset, line, instructionId);
 }
 
 int BNEInstruction::getOffset(const std::string& line) {

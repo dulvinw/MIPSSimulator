@@ -9,7 +9,7 @@ class MFHIInstruction: public Instruction {
 public:
     int execute(int* registers, DataMap& data);
     std::string decode();
-    static std::shared_ptr<MFHIInstruction> parse(const std::string& line, const int instructionId);
+    static MFHIInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
     MFHIInstruction() = delete;

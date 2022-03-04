@@ -9,7 +9,7 @@ class LWInstruction: public Instruction {
 public:
     int execute(int* registers, DataMap& data);
     std::string decode();
-    static std::shared_ptr<LWInstruction> parse(const std::string& line, const int instructionId);
+    static LWInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
     LWInstruction() = delete;

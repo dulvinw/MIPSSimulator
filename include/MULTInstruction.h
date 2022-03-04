@@ -9,7 +9,7 @@ class MULTInstruction: public Instruction {
 public:
     int execute(int* registers, DataMap& data);
     std::string decode();
-    static std::shared_ptr<MULTInstruction> parse(const std::string& line, const int instructionId);
+    static MULTInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
     MULTInstruction() = delete;

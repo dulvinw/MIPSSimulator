@@ -25,10 +25,10 @@
 
 using namespace std;
 
-std::pair<int, shared_ptr<Instruction> > Parser::parseInstruction(const string& line) {
+InstructionPair Parser::parseInstruction(const string& line) {
     int category = stoi(line.substr(0,3), 0, 2);
 
-    shared_ptr<Instruction> instruction;
+    Instruction* instruction;
     switch (category) {
         case CAT_ONE:
             instruction = parseCat1Instruction(line);
@@ -52,10 +52,10 @@ std::pair<int, shared_ptr<Instruction> > Parser::parseInstruction(const string& 
 
     this->_instructionId += 4;
 
-    return std::pair<int, std::shared_ptr<Instruction> > (_instructionId-4, instruction);
+    return InstructionPair(_instructionId-4, instruction);
 }
 
-shared_ptr<Instruction> Parser::parseCat1Instruction(const string& line) {
+Instruction* Parser::parseCat1Instruction(const string& line) {
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_J:
@@ -79,7 +79,7 @@ shared_ptr<Instruction> Parser::parseCat1Instruction(const string& line) {
 }
 
 
-shared_ptr<Instruction> Parser::parseCat2Instruction(const string& line) {
+Instruction* Parser::parseCat2Instruction(const string& line) {
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_ADD:
@@ -98,7 +98,7 @@ shared_ptr<Instruction> Parser::parseCat2Instruction(const string& line) {
 }
 
 
-shared_ptr<Instruction> Parser::parseCat3Instruction(const string& line) {
+Instruction* Parser::parseCat3Instruction(const string& line) {
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_ADDI:
@@ -112,7 +112,7 @@ shared_ptr<Instruction> Parser::parseCat3Instruction(const string& line) {
     }
 }
 
-shared_ptr<Instruction> Parser::parseCat4Instruction(const string& line) {
+Instruction* Parser::parseCat4Instruction(const string& line) {
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_MULT:
@@ -126,7 +126,7 @@ shared_ptr<Instruction> Parser::parseCat4Instruction(const string& line) {
 }
 
 
-shared_ptr<Instruction> Parser::parseCat5Instruction(const string& line) {
+Instruction* Parser::parseCat5Instruction(const string& line) {
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_MFHI:
@@ -150,7 +150,7 @@ void Parser::readFile() {
             auto instruction = parseInstruction(line.substr(0, 32));
             _instructions.insert(instruction);
 
-            auto breakInstruction = dynamic_cast<BreakInstruction*>(instruction.second.get());
+            auto breakInstruction = dynamic_cast<BreakInstruction*>(instruction.second);
             if (breakInstruction) {
                 break;
             }
@@ -165,12 +165,12 @@ void Parser::readFile() {
     }
 }
 
-std::pair<int, std::shared_ptr<Data> > Parser::parseData(const string& line) {
+DataPair Parser::parseData(const string& line) {
     auto raw = stoul(line.substr(0, 32), nullptr, 2);
     int compliment = int(raw);
-    auto data = std::shared_ptr<Data>(new Data(line.substr(0, 32), _instructionId, compliment));
+    auto data = new Data(line.substr(0, 32), _instructionId, compliment);
 
     _instructionId += 4;
 
-    return std::pair<int, std::shared_ptr<Data> >(_instructionId-4, data);
+    return DataPair(_instructionId-4, data);
 }

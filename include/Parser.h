@@ -12,19 +12,29 @@ using namespace std;
 class Parser {
 
 private:
-    shared_ptr<Instruction> parseCat1Instruction(const string& line);
-    shared_ptr<Instruction> parseCat2Instruction(const string& line);
-    shared_ptr<Instruction> parseCat3Instruction(const string& line);
-    shared_ptr<Instruction> parseCat4Instruction(const string& line);
-    shared_ptr<Instruction> parseCat5Instruction(const string& line);
-    std::pair<int, shared_ptr<Instruction> > parseInstruction(const string& line);
-    std::pair<int, shared_ptr<Data> > parseData(const string& line);
+    Instruction* parseCat1Instruction(const string& line);
+    Instruction* parseCat2Instruction(const string& line);
+    Instruction* parseCat3Instruction(const string& line);
+    Instruction* parseCat4Instruction(const string& line);
+    Instruction* parseCat5Instruction(const string& line);
+    InstructionPair parseInstruction(const string& line);
+    DataPair parseData(const string& line);
 
 public:
     void readFile();
     Parser(int instructionId, string fileName) : _instructionId(instructionId), _fileName(fileName) {}
     InstructionMap& getInstructions() {return this->_instructions;}
     DataMap& getData() {return this->_data;}
+
+    ~Parser() {
+        for (auto entry : _data) {
+            delete entry.second;
+        }
+
+        for (auto entry : _instructions) {
+            delete entry.second;
+        }
+    }
 
 
     Parser() = delete;

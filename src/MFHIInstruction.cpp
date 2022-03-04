@@ -22,8 +22,8 @@ std::string MFHIInstruction::getInstructionString() {
     return ss.str();
 }
 
-std::shared_ptr<MFHIInstruction> MFHIInstruction::parse(const std::string& line, const int instructionId) {
+MFHIInstruction* MFHIInstruction::parse(const std::string& line, const int instructionId) {
     auto rt = stoi(line.substr(6, 5), 0, 2);
 
-    return std::shared_ptr<MFHIInstruction>(new MFHIInstruction(rt, line, instructionId));
+    return new MFHIInstruction(rt, line, instructionId);
 }

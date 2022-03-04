@@ -24,10 +24,10 @@ std::string SWInstruction::getInstructionString() {
     return ss.str();
 }
 
-std::shared_ptr<SWInstruction> SWInstruction::parse(const std::string& line, const int instructionId) {
+SWInstruction* SWInstruction::parse(const std::string& line, const int instructionId) {
     auto r = stoi(line.substr(6, 5), 0, 2);
     auto t = stoi(line.substr(11, 5), 0, 2);
     auto offset = stoi(line.substr(16, 16), 0, 2);
 
-    return std::shared_ptr<SWInstruction>(new SWInstruction(r, t, offset, line, instructionId));
+    return new SWInstruction(r, t, offset, line, instructionId);
 }

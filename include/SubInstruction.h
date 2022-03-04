@@ -9,7 +9,7 @@ class SubInstruction: public Instruction {
 public:
     int execute(int* registers, DataMap& data);
     std::string decode();
-    static std::shared_ptr<SubInstruction> parse(const std::string& line, const int instructionId);
+    static SubInstruction* parse(const std::string& line, const int instructionId);
     std::string getInstructionString();
 
     SubInstruction() = delete;

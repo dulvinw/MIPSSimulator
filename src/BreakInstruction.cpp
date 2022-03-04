@@ -21,8 +21,8 @@ std::string BreakInstruction::getInstructionString() {
     return ss.str();
 }
 
-std::shared_ptr<BreakInstruction> BreakInstruction::parse(const std::string& line, const int instructionId) {
+BreakInstruction* BreakInstruction::parse(const std::string& line, const int instructionId) {
     auto code = stoi(line.substr(6, 20), 0, 2);
 
-    return std::shared_ptr<BreakInstruction>(new BreakInstruction(code, line, instructionId));
+    return new BreakInstruction(code, line, instructionId);
 }

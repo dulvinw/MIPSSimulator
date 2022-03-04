@@ -17,12 +17,12 @@ std::string BEQInstruction::decode() {
     return ss.str();
 }
 
-std::shared_ptr<BEQInstruction> BEQInstruction::parse(const std::string& line, const int instructionId) {
+BEQInstruction* BEQInstruction::parse(const std::string& line, const int instructionId) {
     auto r = stoi(line.substr(6, 5), 0, 2);
     auto t = stoi(line.substr(11, 5), 0, 2);
     auto offset = getOffset(line.substr(16, 16));
 
-    return std::shared_ptr<BEQInstruction>(new BEQInstruction(r, t, offset, line, instructionId));
+    return new BEQInstruction(r, t, offset, line, instructionId);
 }
 
 std::string BEQInstruction::getInstructionString() {

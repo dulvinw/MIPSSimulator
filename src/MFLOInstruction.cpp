@@ -22,8 +22,8 @@ std::string MFLOInstruction::getInstructionString() {
     return ss.str();
 }
 
-std::shared_ptr<MFLOInstruction> MFLOInstruction::parse(const std::string& line, const int instructionId) {
+MFLOInstruction* MFLOInstruction::parse(const std::string& line, const int instructionId) {
     auto rt = stoi(line.substr(6, 5), 0, 2);
 
-    return std::shared_ptr<MFLOInstruction>(new MFLOInstruction(rt, line, instructionId));
+    return new MFLOInstruction(rt, line, instructionId);
 }

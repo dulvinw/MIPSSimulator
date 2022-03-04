@@ -20,12 +20,12 @@ public:
 
 private:
     void executeInstruction(std::ofstream& file);
-    void printHeader(std::ofstream& file, shared_ptr<Instruction> instruction, const int count);
+    void printHeader(std::ofstream& file, Instruction* instruction, const int count);
     void printData(std::ofstream& file, DataMap& data);
     void printRegisters(std::ofstream& file);
     void printFirstColumnInRegisterReport(std::ofstream& file, const int i);
     void printFirstColumnInDataReport(std::ofstream& file, const int i);
-    shared_ptr<Instruction> getNextInstruction(InstructionMap& instructions, const int address);
+    Instruction* getNextInstruction(InstructionMap& instructions, const int address);
 
 private:
     Parser& _parser;

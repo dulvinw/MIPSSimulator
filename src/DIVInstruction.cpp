@@ -26,9 +26,9 @@ std::string DIVInstruction::getInstructionString() {
 
     return ss.str();
 }
-std::shared_ptr<DIVInstruction> DIVInstruction::parse(const std::string& line, const int instructionId) {
+DIVInstruction* DIVInstruction::parse(const std::string& line, const int instructionId) {
     auto rt = stoi(line.substr(6, 5), 0, 2);
     auto rs = stoi(line.substr(11, 5), 0, 2);
 
-    return std::shared_ptr<DIVInstruction>(new DIVInstruction(rt, rs, line, instructionId));
+    return new DIVInstruction(rt, rs, line, instructionId);
 }

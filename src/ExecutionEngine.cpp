@@ -40,7 +40,7 @@ void ExecutionEngine::executeInstruction(std::ofstream& file) {
     }
 }
 
-shared_ptr<Instruction> ExecutionEngine::getNextInstruction(InstructionMap& instructions, const int address) {
+Instruction* ExecutionEngine::getNextInstruction(InstructionMap& instructions, const int address) {
     auto currInstruction = instructions.find(address);
     if (currInstruction == instructions.end()) {
         return nullptr;
@@ -52,7 +52,7 @@ shared_ptr<Instruction> ExecutionEngine::getNextInstruction(InstructionMap& inst
     return currInstruction->second;
 }
 
-void ExecutionEngine::printHeader(std::ofstream& file, std::shared_ptr<Instruction> instruction, const int cycleCount) {
+void ExecutionEngine::printHeader(std::ofstream& file, Instruction* instruction, const int cycleCount) {
         file << "--------------------" << std::endl;
         file << "Cycle " << cycleCount << ":\t" << instruction->getInstructionId() << "\t\t" << instruction->getInstructionString() << std::endl;
         file << std::endl;
