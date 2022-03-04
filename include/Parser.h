@@ -1,8 +1,9 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-#include "AddInstruction.h"
+#include "Instruction.h"
 #include "Definitions.h"
+#include "Data.h"
 
 #include <string>
 
@@ -16,11 +17,15 @@ private:
     shared_ptr<Instruction> parseCat3Instruction(const string& line);
     shared_ptr<Instruction> parseCat4Instruction(const string& line);
     shared_ptr<Instruction> parseCat5Instruction(const string& line);
+    std::pair<int, shared_ptr<Instruction> > parseInstruction(const string& line);
+    std::pair<int, shared_ptr<Data> > parseData(const string& line);
 
 public:
-    shared_ptr<Instruction> parseLine(const string& line);
-    static shared_ptr<InstructionVector> readFile(string& fileName);
-    Parser(int instructionId) : _instructionId(instructionId) {}
+    void readFile();
+    Parser(int instructionId, string fileName) : _instructionId(instructionId), _fileName(fileName) {}
+    InstructionMap& getInstructions() {return this->_instructions;}
+    DataMap& getData() {return this->_data;}
+
 
     Parser() = delete;
 
@@ -66,6 +71,9 @@ private:
 
 
     int _instructionId;
+    string _fileName;
+    InstructionMap _instructions;
+    DataMap _data;
 };
 
 #endif

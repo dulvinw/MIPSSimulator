@@ -14,7 +14,7 @@ public:
     MULTInstruction() = delete;
 
 private:
-    MULTInstruction(int rs, int rt, const std::string& line, const int instructionId) 
+    MULTInstruction(int rt, int rs, const std::string& line, const int instructionId) 
                         : _rs(rs), _rt(rt), Instruction(line, instructionId) {}
 
 

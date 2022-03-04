@@ -14,7 +14,7 @@ public:
     DIVInstruction() = delete;
 
 private:
-    DIVInstruction(int rs, int rt, const std::string& line, const int instructionId) 
+    DIVInstruction(int rt, int rs, const std::string& line, const int instructionId) 
                         : _rs(rs), _rt(rt), Instruction(line, instructionId) {}
 
 

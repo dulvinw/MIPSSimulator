@@ -2,8 +2,13 @@
 #define DEFINITIONS_H
 
 #include "Instruction.h"
-#include <vector>
+#include "Data.h"
 
-using InstructionVector = std::vector<std::shared_ptr<Instruction> >; 
+#include <map>
+
+using InstructionMap = std::map<int, std::shared_ptr<Instruction> >; 
+using DataMap = std::map<int, std::shared_ptr<Data> >;
+
+static const int START_INSTRUCTION_ADDRESS = 256;
 
 #endif

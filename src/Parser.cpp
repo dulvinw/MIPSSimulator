@@ -16,6 +16,8 @@
 #include "OrIInstruction.h"
 #include "MULTInstruction.h"
 #include "DIVInstruction.h"
+#include "MFHIInstruction.h"
+#include "MFLOInstruction.h"
 
 #include <fstream>
 #include <iostream>
@@ -23,7 +25,7 @@
 
 using namespace std;
 
-shared_ptr<Instruction> Parser::parseLine(const string& line) {
+std::pair<int, shared_ptr<Instruction> > Parser::parseInstruction(const string& line) {
     cout << "Parsing category for instruction line: " << line << " category: " << line.substr(0,3) << endl;
 
     int category = stoi(line.substr(0,3), 0, 2);
@@ -52,7 +54,7 @@ shared_ptr<Instruction> Parser::parseLine(const string& line) {
 
     this->_instructionId += 4;
 
-    return instruction;
+    return std::pair<int, std::shared_ptr<Instruction> > (_instructionId-4, instruction);
 }
 
 shared_ptr<Instruction> Parser::parseCat1Instruction(const string& line) {
@@ -134,43 +136,60 @@ shared_ptr<Instruction> Parser::parseCat4Instruction(const string& line) {
 }
 
 
-shared_ptr<Instruction> Parser::parseCat4Instruction(const string& line) {
+shared_ptr<Instruction> Parser::parseCat5Instruction(const string& line) {
     cout << "Parsing opcode for category 4. Opcode: " << line.substr(3,3) << std::endl;
 
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_MFHI:
+            return MFHIInstruction::parse(line, this->_instructionId);
         case INST_MFLO:
+            return MFLOInstruction::parse(line, this->_instructionId);
 
         default:
             return nullptr;
     }
 }
 
-shared_ptr<InstructionVector> Parser::readFile(string& fileName) {
-    shared_ptr<InstructionVector> instructions(new InstructionVector());
-    Parser parser(START_INSTRUCTION_ADDRESS);
-
+void Parser::readFile() {
     ifstream file;
 
     try
     {
-        file.open(fileName);
+        file.open(_fileName);
         file.exceptions(std::ifstream::failbit);
 
         string line; 
         while (getline(file, line)) {
-            auto instruction = parser.parseLine(line.substr(0, 32));
-            instructions->push_back(move(instruction));
+            auto instruction = parseInstruction(line.substr(0, 32));
+            _instructions.insert(instruction);
+
+            auto breakInstruction = dynamic_cast<BreakInstruction*>(instruction.second.get());
+            if (breakInstruction) {
+                std::cout << "BREAK Found. Reading data" << std::endl;
+                break;
+            }
+        }
+
+        // Parse Data memory
+        while (getline(file, line)) {
+            _data.insert(parseData(line));
         }
         
         file.close();
     }
     catch(const std::ios_base::failure& fail)
     {
-        cerr << "Error opening file: " << fileName << '\n';
+        cerr << "Error opening file: " << _fileName << '\n';
     }
-    
+}
 
-    return instructions;
+std::pair<int, std::shared_ptr<Data> > Parser::parseData(const string& line) {
+    auto raw = stoul(line.substr(0, 32), nullptr, 2);
+    int compliment = int(raw);
+    auto data = std::shared_ptr<Data>(new Data(line.substr(0, 32), _instructionId, compliment));
+
+    _instructionId += 4;
+
+    return std::pair<int, std::shared_ptr<Data> >(_instructionId-4, data);
 }

@@ -9,9 +9,7 @@
 
 using namespace std;
 
-
-
-void dessemble(shared_ptr<InstructionVector> instructions) {
+void dessemble(Parser& parser) {
 
     ofstream disassemble;
 
@@ -19,10 +17,14 @@ void dessemble(shared_ptr<InstructionVector> instructions) {
     {
         disassemble.open(DISASSEMBLE_FILE_NAME);
         disassemble.exceptions(std::ifstream::failbit);
-        for (auto instruction : *instructions) {
-            if (instruction == nullptr)
+        for (auto instruction : parser.getInstructions()) {
+            if (instruction.second == nullptr)
                 continue;
-            disassemble << instruction->decode();
+            disassemble << instruction.second->decode();
+        }
+
+        for (auto data : parser.getData()) {
+            disassemble << data.second->decode();
         }
 
         disassemble.close();
@@ -36,8 +38,10 @@ void dessemble(shared_ptr<InstructionVector> instructions) {
 
 int main(int argc, char* argv[]) {
     string fileName(argv[1]);
-    auto instructions = Parser::readFile(fileName);
+    Parser parser(START_INSTRUCTION_ADDRESS, fileName);
 
-    dessemble(instructions);
+    parser.readFile();
+
+    dessemble(parser);
     return 0;
 }
