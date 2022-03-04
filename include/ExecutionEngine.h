@@ -10,7 +10,7 @@ class ExecutionEngine {
 
 public:
     ExecutionEngine(Parser& parser) : _parser(parser) {
-        for (int i = 0; i < NUM_OF_REGISTERS; i++) {
+        for (int i = 0; i < (NUM_OF_REGISTERS+NUM_OF_SPECIAL_REG); i++) {
             _registers[i] = 0;
         }
         
@@ -29,7 +29,7 @@ private:
 
 private:
     Parser& _parser;
-    int _registers[NUM_OF_REGISTERS];
+    int _registers[NUM_OF_REGISTERS+NUM_OF_SPECIAL_REG];
 };
 
 #endif

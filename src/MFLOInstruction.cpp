@@ -4,7 +4,7 @@
 #include <sstream>
 
 int MFLOInstruction::execute(int* registers, DataMap& data) {
-    registers[_dest] = registers[HI_REGISTER_ADDRESS];
+    registers[_dest] = registers[LO_REGISTER_ADDRESS];
     return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 

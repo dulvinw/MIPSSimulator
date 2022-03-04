@@ -167,7 +167,7 @@ void Parser::readFile() {
     }
     catch(const std::ios_base::failure& fail)
     {
-        exit(0);
+
     }
 }
 

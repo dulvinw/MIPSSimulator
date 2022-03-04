@@ -6,7 +6,8 @@
 static const std::string DISASSEMBLE_FILE_NAME = "disassembly.txt";
 static const std::string SIMULATION_FILE_NAME = "simulation.txt";
 
-static const int NUM_OF_REGISTERS = 34;
+static const int NUM_OF_REGISTERS = 32;
+static const int NUM_OF_SPECIAL_REG = 2;
 static const int NUM_OF_COLUMNS_IN_REGISTER_REPORT = 8;
 static const int HI_REGISTER_ADDRESS = 32;
 static const int LO_REGISTER_ADDRESS = 33;

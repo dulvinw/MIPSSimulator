@@ -7,6 +7,10 @@ int MULTInstruction::execute(int* registers, DataMap& data) {
     int64_t result = registers[_rs] * registers[_rt];
     int32_t hi  = ((result & 0xFFFFFFFF00000000LL) >> 32);
     int32_t lo = (result & 0xFFFFFFFFLL);
+
+    registers[HI_REGISTER_ADDRESS] = hi;
+    registers[LO_REGISTER_ADDRESS] = lo;
+
     return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
