@@ -1,0 +1,26 @@
+#ifndef AND_INSTRUCTION_H
+#define AND_INSTRUCTION_H
+
+#include "Instruction.h"
+
+#include <string>
+
+class AndInstruction: public Instruction {
+public:
+    void execute();
+    std::string decode();
+    static std::shared_ptr<AndInstruction> parse(const std::string& line, const int instructionId);
+
+    AndInstruction() = delete;
+
+private:
+    AndInstruction(int dest, int srcOne, int srcTwo, const std::string& line, const int instructionId) 
+                        : _dest(dest), _srcOne(srcOne), _srcTwo(srcTwo), Instruction(line, instructionId) {}
+
+private:
+    int _dest;
+    int _srcOne;
+    int _srcTwo;
+};
+
+#endif

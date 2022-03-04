@@ -8,9 +8,9 @@
 class JumpInstruction : public Instruction {
 public:
     void execute();
-    void print();
+    std::string decode();
 
-    static std::shared_ptr<JumpInstruction> parse(const std::string& line);
+    static std::shared_ptr<JumpInstruction> parse(const std::string& line, const int instructionId);
 };
 
 #endif
