@@ -9,6 +9,13 @@
 #include "BreakInstruction.h"
 #include "SubInstruction.h"
 #include "AndInstruction.h"
+#include "SRLInstruction.h"
+#include "SRAInstruction.h"
+#include "AndIInstruction.h"
+#include "AddIInstruction.h"
+#include "OrIInstruction.h"
+#include "MULTInstruction.h"
+#include "DIVInstruction.h"
 
 #include <fstream>
 #include <iostream>
@@ -29,6 +36,16 @@ shared_ptr<Instruction> Parser::parseLine(const string& line) {
         case CAT_TWO:
             instruction = parseCat2Instruction(line);
             break;
+        case CAT_THREE:
+            instruction = parseCat3Instruction(line);
+            break;
+        case CAT_FOUR:
+            instruction = parseCat4Instruction(line);
+            break;
+        case CAT_FIVE:
+            instruction = parseCat5Instruction(line);
+            break;
+
         default:
             instruction = nullptr;
     }
@@ -67,7 +84,6 @@ shared_ptr<Instruction> Parser::parseCat1Instruction(const string& line) {
 shared_ptr<Instruction> Parser::parseCat2Instruction(const string& line) {
     cout << "Parsing opcode for category 2. Opcode: " << line.substr(3,3) << std::endl;
 
-
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_ADD:
@@ -76,6 +92,56 @@ shared_ptr<Instruction> Parser::parseCat2Instruction(const string& line) {
             return SubInstruction::parse(line, this->_instructionId);
         case INST_AND:
             return AndInstruction::parse(line, this->_instructionId);
+        case INST_SRL:
+            return SRLInstruction::parse(line, this->_instructionId);
+        case INST_SRA:
+            return SRAInstruction::parse(line, this->_instructionId);
+        default:
+            return nullptr;
+    }
+}
+
+
+shared_ptr<Instruction> Parser::parseCat3Instruction(const string& line) {
+    cout << "Parsing opcode for category 3. Opcode: " << line.substr(3,3) << std::endl;
+
+    int opCode = stoi(line.substr(3,3), 0, 2);
+    switch (opCode) {
+        case INST_ADDI:
+            return AddIInstruction::parse(line, this->_instructionId);
+        case INST_ANDI:
+            return AndIInstruction::parse(line, this->_instructionId);
+        case INST_ORI:
+            return OrIInstruction::parse(line, this->_instructionId);
+        default:
+            return nullptr;
+    }
+}
+
+shared_ptr<Instruction> Parser::parseCat4Instruction(const string& line) {
+    cout << "Parsing opcode for category 4. Opcode: " << line.substr(3,3) << std::endl;
+
+    int opCode = stoi(line.substr(3,3), 0, 2);
+    switch (opCode) {
+        case INST_MULT:
+            return MULTInstruction::parse(line, this->_instructionId);
+        case INST_DIV:
+            return DIVInstruction::parse(line, this->_instructionId);
+
+        default:
+            return nullptr;
+    }
+}
+
+
+shared_ptr<Instruction> Parser::parseCat4Instruction(const string& line) {
+    cout << "Parsing opcode for category 4. Opcode: " << line.substr(3,3) << std::endl;
+
+    int opCode = stoi(line.substr(3,3), 0, 2);
+    switch (opCode) {
+        case INST_MFHI:
+        case INST_MFLO:
+
         default:
             return nullptr;
     }
