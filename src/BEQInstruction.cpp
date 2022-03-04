@@ -9,7 +9,7 @@ void BEQInstruction::execute() {
 
 std::string BEQInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "BEQ " << "R" << _r << ", R" << _t << ", #" << _offset << std::endl;
+    ss << getPreamble() <<  getInstructionString() << std::endl;
 
     return ss.str();
 }
@@ -20,6 +20,13 @@ std::shared_ptr<BEQInstruction> BEQInstruction::parse(const std::string& line, c
     auto offset = getOffset(line.substr(16, 16));
 
     return std::shared_ptr<BEQInstruction>(new BEQInstruction(r, t, offset, line, instructionId));
+}
+
+std::string BEQInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss <<  "BEQ " << "R" << _r << ", R" << _t << ", #" << _offset;
+
+    return ss.str();
 }
 
 int BEQInstruction::getOffset(const std::string& line) {

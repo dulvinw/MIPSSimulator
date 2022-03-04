@@ -9,7 +9,14 @@ void AddInstruction::execute() {
 
 std::string AddInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "ADD " << "R" << _dest << ", R" << _srcOne << ", R" << _srcTwo << std::endl;
+    ss << getPreamble() <<  getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string AddInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "ADD " << "R" << _dest << ", R" << _srcOne << ", R" << _srcTwo;
 
     return ss.str();
 }

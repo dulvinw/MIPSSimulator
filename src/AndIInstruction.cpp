@@ -9,7 +9,14 @@ void AndIInstruction::execute() {
 
 std::string AndIInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "ANDI " << "R" << _dest << ", R" << _srcOne << ", #" << _immediate << std::endl;
+    ss << getPreamble() <<  getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string AndIInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "ANDI " << "R" << _dest << ", R" << _srcOne << ", #" << _immediate;
 
     return ss.str();
 }

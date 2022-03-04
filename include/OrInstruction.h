@@ -10,6 +10,7 @@ public:
     void execute();
     std::string decode();
     static std::shared_ptr<OrInstruction> parse(const std::string& line, const int instructionId);
+    std::string getInstructionString();
 
     OrInstruction() = delete;
 

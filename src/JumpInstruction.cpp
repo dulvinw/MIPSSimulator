@@ -9,7 +9,14 @@ void JumpInstruction::execute() {
 
 std::string JumpInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "J #" << _jumpTo << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string JumpInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "J #" << _jumpTo;
 
     return ss.str();
 }

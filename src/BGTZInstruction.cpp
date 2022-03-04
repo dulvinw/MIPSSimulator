@@ -9,7 +9,7 @@ void BGTZInstruction::execute() {
 
 std::string BGTZInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "BGTZ " << "R" << _r << ", #" << _offset << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
 
     return ss.str();
 }
@@ -19,6 +19,13 @@ std::shared_ptr<BGTZInstruction> BGTZInstruction::parse(const std::string& line,
     auto offset = getOffset(line.substr(16, 16));
 
     return std::shared_ptr<BGTZInstruction>(new BGTZInstruction(r, offset, line, instructionId));
+}
+
+std::string BGTZInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "BGTZ " << "R" << _r << ", #" << _offset;
+
+    return ss.str();
 }
 
 int BGTZInstruction::getOffset(const std::string& line) {

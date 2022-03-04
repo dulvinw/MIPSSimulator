@@ -9,7 +9,14 @@ void MFHIInstruction::execute() {
 
 std::string MFHIInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "MFHI R" << _dest << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string MFHIInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "MFHI R" << _dest;
 
     return ss.str();
 }

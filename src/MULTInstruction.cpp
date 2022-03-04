@@ -9,7 +9,14 @@ void MULTInstruction::execute() {
 
 std::string MULTInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "MULT R" << _rt << ", R" << _rs << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string MULTInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "MULT R" << _rt << ", R" << _rs;
 
     return ss.str();
 }

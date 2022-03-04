@@ -10,6 +10,7 @@ public:
     void execute();
     std::string decode();
     static std::shared_ptr<MFHIInstruction> parse(const std::string& line, const int instructionId);
+    std::string getInstructionString();
 
     MFHIInstruction() = delete;
 

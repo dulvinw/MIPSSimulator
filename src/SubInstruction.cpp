@@ -9,7 +9,14 @@ void SubInstruction::execute() {
 
 std::string SubInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "SUB " << "R" << _dest << ", R" << _srcOne << ", R" << _srcTwo << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string SubInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "SUB " << "R" << _dest << ", R" << _srcOne << ", R" << _srcTwo;
 
     return ss.str();
 }

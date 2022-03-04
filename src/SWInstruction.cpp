@@ -9,7 +9,14 @@ void SWInstruction::execute() {
 
 std::string SWInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "SW R" << _rt << ", " << _offset << "(R" << _base << ")" << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string SWInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "SW R" << _rt << ", " << _offset << "(R" << _base << ")";
 
     return ss.str();
 }

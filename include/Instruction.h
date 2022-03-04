@@ -15,6 +15,8 @@ public:
         return ss.str();
     }
 
+    virtual std::string getInstructionString() = 0;
+
     int getInstructionId() {return _instructionId;}
 
     Instruction(const std::string& line, const int instructionId) : _line(line), _instructionId(instructionId) {}

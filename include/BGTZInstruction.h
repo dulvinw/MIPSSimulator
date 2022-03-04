@@ -10,6 +10,7 @@ public:
     void execute();
     std::string decode();
     static std::shared_ptr<BGTZInstruction> parse(const std::string& line, const int instructionId);
+    std::string getInstructionString();
 
     BGTZInstruction() = delete;
 

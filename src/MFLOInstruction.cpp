@@ -9,7 +9,14 @@ void MFLOInstruction::execute() {
 
 std::string MFLOInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "MFLO R" << _dest << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string MFLOInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "MFLO R" << _dest;
 
     return ss.str();
 }

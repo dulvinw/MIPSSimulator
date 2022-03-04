@@ -9,7 +9,14 @@ void LWInstruction::execute() {
 
 std::string LWInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "LW R" << _rt << ", " << _offset << "(R" << _base << ")" << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string LWInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "LW R" << _rt << ", " << _offset << "(R" << _base << ")";
 
     return ss.str();
 }

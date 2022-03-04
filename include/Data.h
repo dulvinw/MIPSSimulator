@@ -19,9 +19,9 @@ public:
 
     Data() = delete;
 
-private:
+public:
     const std::string _line;
-    int _instructionId;
+    const int _instructionId;
     int _data;
 };
 

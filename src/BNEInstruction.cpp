@@ -9,7 +9,14 @@ void BNEInstruction::execute() {
 
 std::string BNEInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "BNE " << "R" << _r << ", R" << _t << ", #" << _offset << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string BNEInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "BNE " << "R" << _r << ", R" << _t << ", #" << _offset;
 
     return ss.str();
 }

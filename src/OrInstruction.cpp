@@ -9,7 +9,14 @@ void OrInstruction::execute() {
 
 std::string OrInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "OR " << "R" << _dest << ", R" << _srcOne << ", R" << _srcTwo << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string OrInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "OR " << "R" << _dest << ", R" << _srcOne << ", R" << _srcTwo;
 
     return ss.str();
 }

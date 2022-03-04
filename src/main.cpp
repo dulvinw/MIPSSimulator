@@ -2,6 +2,7 @@
 #include "Definitions.h"
 #include "Parser.h"
 #include "Constants.h"
+#include "ExecutionEngine.h"
 
 #include <fstream>
 #include <iostream>
@@ -43,5 +44,9 @@ int main(int argc, char* argv[]) {
     parser.readFile();
 
     dessemble(parser);
+
+    ExecutionEngine engine(parser);
+    engine.execute();
+
     return 0;
 }

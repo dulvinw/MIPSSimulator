@@ -9,7 +9,14 @@ void BreakInstruction::execute() {
 
 std::string BreakInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "BREAK" << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
+
+    return ss.str();
+}
+
+std::string BreakInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "BREAK";
 
     return ss.str();
 }

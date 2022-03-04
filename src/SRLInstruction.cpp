@@ -9,10 +9,18 @@ void SRLInstruction::execute() {
 
 std::string SRLInstruction::decode() {
     std::stringstream ss;
-    ss << getPreamble() << "SRA " << "R" << _dest << ", R" << _srcOne << ", #" << _immediate << std::endl;
+    ss << getPreamble() << getInstructionString() << std::endl;
 
     return ss.str();
 }
+
+std::string SRLInstruction::getInstructionString() {
+    std::stringstream ss;
+    ss << "SRA " << "R" << _dest << ", R" << _srcOne << ", #" << _immediate;
+
+    return ss.str();
+}
+
 std::shared_ptr<SRLInstruction> SRLInstruction::parse(const std::string& line, const int instructionId) {
     auto dest = stoi(line.substr(6, 5), 0, 2);
     auto srcOne = stoi(line.substr(11, 5), 0, 2);
