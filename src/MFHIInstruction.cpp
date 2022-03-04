@@ -4,7 +4,7 @@
 #include <sstream>
 
 int MFHIInstruction::execute(int* registers, DataMap& data) {
-    std::cout << "Hello world";
+    registers[_dest] = registers[HI_REGISTER_ADDRESS];
     return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 

@@ -26,8 +26,6 @@
 using namespace std;
 
 std::pair<int, shared_ptr<Instruction> > Parser::parseInstruction(const string& line) {
-    cout << "Parsing category for instruction line: " << line << " category: " << line.substr(0,3) << endl;
-
     int category = stoi(line.substr(0,3), 0, 2);
 
     shared_ptr<Instruction> instruction;
@@ -58,8 +56,6 @@ std::pair<int, shared_ptr<Instruction> > Parser::parseInstruction(const string& 
 }
 
 shared_ptr<Instruction> Parser::parseCat1Instruction(const string& line) {
-    cout << "Parsing opcode for category 1. Opcode: " << line.substr(3,3) << std::endl;
-
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_J:
@@ -84,8 +80,6 @@ shared_ptr<Instruction> Parser::parseCat1Instruction(const string& line) {
 
 
 shared_ptr<Instruction> Parser::parseCat2Instruction(const string& line) {
-    cout << "Parsing opcode for category 2. Opcode: " << line.substr(3,3) << std::endl;
-
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_ADD:
@@ -105,8 +99,6 @@ shared_ptr<Instruction> Parser::parseCat2Instruction(const string& line) {
 
 
 shared_ptr<Instruction> Parser::parseCat3Instruction(const string& line) {
-    cout << "Parsing opcode for category 3. Opcode: " << line.substr(3,3) << std::endl;
-
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_ADDI:
@@ -121,8 +113,6 @@ shared_ptr<Instruction> Parser::parseCat3Instruction(const string& line) {
 }
 
 shared_ptr<Instruction> Parser::parseCat4Instruction(const string& line) {
-    cout << "Parsing opcode for category 4. Opcode: " << line.substr(3,3) << std::endl;
-
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_MULT:
@@ -137,8 +127,6 @@ shared_ptr<Instruction> Parser::parseCat4Instruction(const string& line) {
 
 
 shared_ptr<Instruction> Parser::parseCat5Instruction(const string& line) {
-    cout << "Parsing opcode for category 4. Opcode: " << line.substr(3,3) << std::endl;
-
     int opCode = stoi(line.substr(3,3), 0, 2);
     switch (opCode) {
         case INST_MFHI:
@@ -166,7 +154,6 @@ void Parser::readFile() {
 
             auto breakInstruction = dynamic_cast<BreakInstruction*>(instruction.second.get());
             if (breakInstruction) {
-                std::cout << "BREAK Found. Reading data" << std::endl;
                 break;
             }
         }
@@ -180,7 +167,7 @@ void Parser::readFile() {
     }
     catch(const std::ios_base::failure& fail)
     {
-        cerr << "Error opening file: " << _fileName << '\n';
+        exit(0);
     }
 }
 

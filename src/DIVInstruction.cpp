@@ -4,6 +4,12 @@
 #include <sstream>
 
 int DIVInstruction::execute(int* registers, DataMap& data) {
+    int quotient = registers[_rt] / registers[_rs];
+    int remainder = registers[_rt] % registers[_rs];
+
+    registers[HI_REGISTER_ADDRESS] = remainder;
+    registers[LO_REGISTER_ADDRESS] = quotient;
+
     return _instructionId + NEXT_INSTRUCTION_OFFSET;
 }
 
